@@ -1,11 +1,7 @@
 const mysql = require('mysql')
+const mysqlConfig = require('./db_config').mysql
 
-const pool = mysql.createPool({
-  host: '127.0.0.1', // 改为自己的 host
-  user: 'root', // 改为自己的 user
-  password: 'abc123', // 改为自己的 password
-  database: 'brother_album',
-})
+const pool = mysql.createPool(mysqlConfig)
 
 function query(sql, values) {
   return new Promise((resolve, reject) => {
