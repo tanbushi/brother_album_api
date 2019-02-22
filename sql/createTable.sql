@@ -63,7 +63,6 @@ CREATE TABLE `picture` (
   `extra` VARCHAR(10000) NOT NULL DEFAULT '' COMMENT '备用字段',
   `created` INT(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated` INT(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-
   `isDeleted` INT(11) NOT NULL DEFAULT '0' COMMENT '0未删除 1已删除',
   PRIMARY KEY (`id`),
   KEY `idx_created` (`created`),
