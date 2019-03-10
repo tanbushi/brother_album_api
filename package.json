@@ -25,7 +25,8 @@
     "mysql": "^2.16.0",
     "pug": "^2.0.0-rc.1",
     "query-string": "^6.3.0",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
   },
   "devDependencies": {
     "eslint": "^5.12.1",
