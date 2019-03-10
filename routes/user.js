@@ -45,7 +45,7 @@ router.post('/login', async (ctx) => {
     const user = userList[0]
     ctx.body = {
       code: '1001',
-      res: {
+      result: {
         token: user.token,
       },
     }
@@ -69,29 +69,10 @@ router.post('/login', async (ctx) => {
   await query(xcxauthSql)
   ctx.body = {
     code: '1001',
-    res: {
+    result: {
       token,
     },
   }
-
-
-  // if (userList.length === 1) {
-  //   const res = {
-  //     token: userList[0].token,
-  //   }
-  //   return {
-  //     code: 1001,
-  //     res,
-  //   }
-  // }
-  // return {
-  //   token: guidGenerator(),
-  // }
-
-  // ctx.body = {
-  //   code: 1001,
-  //   msg: 'login successful!',
-  // }
 })
 
 module.exports = router
