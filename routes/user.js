@@ -32,6 +32,15 @@ router.post('/login', async (ctx) => {
   const body = await rp(`https://api.weixin.qq.com/sns/jscode2session?${params}`)
   const bodyParsed = JSON.parse(body)
 
+  if (bodyParsed.errcode) {
+    ctx.body = {
+      code: 1002,
+      msg: '无效的code',
+      detail: body,
+    }
+    return
+  }
+
   const sessionKey = bodyParsed.session_key
   const openId = bodyParsed.openid
 
