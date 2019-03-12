@@ -3,3 +3,5 @@ node_modules/
 util/db_config.js
 
 config/index.js
+
+nohup.out
