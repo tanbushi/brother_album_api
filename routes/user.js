@@ -21,6 +21,16 @@ router.get('/bar', (ctx) => {
   ctx.body = 'this is a users/bar response'
 })
 
+router.get('/profile', (ctx) => {
+  const { user } = ctx
+  ctx.body = {
+    code: 1001,
+    result: {
+      userInfo: user,
+    },
+  }
+})
+
 router.post('/login', async (ctx) => {
   const { code } = ctx.request.body
   const params = qs.stringify({
