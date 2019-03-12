@@ -84,4 +84,40 @@ router.post('/login', async (ctx) => {
   }
 })
 
+router.post('/update', async (ctx) => {
+  const { user } = ctx
+  const {
+    nickName, avatarUrl, city, country, device, gender, province, language,
+  } = ctx.request.body
+  const sql = `update user set 
+      user.nickname='${nickName}',
+      user.avatar='${avatarUrl}',
+      user.device='${device}',
+      user.gender='${gender}',
+      user.country='${country}',
+      user.province='${province}'
+      user.city='${city}',
+      user.language='${language}'
+    where user.id = ${user.id}
+  `
+  const { affectedRows } = await query(sql)
+  if (!affectedRows) {
+    ctx.body = {
+      code: 1002,
+      msg: '授权失败',
+    }
+    return
+  }
+
+  ctx.body = {
+    code: 1001,
+    msg: '授权成功',
+    result: {
+      userInfo: {
+        nickName, avatarUrl, city, country, device, gender, province, language,
+      },
+    },
+  }
+})
+
 module.exports = router

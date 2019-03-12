@@ -10,6 +10,7 @@ const logger = require('koa-logger')
 const index = require('./routes/index')
 const user = require('./routes/user')
 
+const { query } = require('./util/db')
 // error handler
 onerror(app)
 
@@ -31,6 +32,14 @@ app.use(async (ctx, next) => {
   await next()
   const ms = new Date() - start
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
+})
+
+app.use(async (ctx, next) => {
+  const { token } = ctx.request.query
+  const sql = `select * from user where token = '${token}'`
+  const [currentUser] = await query(sql)
+  ctx.user = currentUser
+  await next()
 })
 
 // routes
