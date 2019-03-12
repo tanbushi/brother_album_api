@@ -51,11 +51,15 @@ router.post('/login', async (ctx) => {
     const existId = authList[0].userId
     const existUserSql = `select * from user where id = '${existId}'`
     const userList = await query(existUserSql)
-    const user = userList[0]
+    const {
+      id, nickname, token,
+    } = userList[0]
     ctx.body = {
       code: '1001',
       result: {
-        token: user.token,
+        id,
+        token,
+        authed: nickname !== '',
       },
     }
     return
@@ -79,7 +83,9 @@ router.post('/login', async (ctx) => {
   ctx.body = {
     code: '1001',
     result: {
+      id: insertId,
       token,
+      authed: false,
     },
   }
 })
@@ -113,9 +119,7 @@ router.post('/update', async (ctx) => {
     code: 1001,
     msg: '授权成功',
     result: {
-      userInfo: {
-        nickName, avatarUrl, city, country, device, gender, province, language,
-      },
+      authed: true,
     },
   }
 })
