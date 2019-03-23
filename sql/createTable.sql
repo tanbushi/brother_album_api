@@ -54,9 +54,25 @@ CREATE TABLE `xcxuserauth` (
   KEY `idx_openId_unionId` (`openId`,`unionId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8001 DEFAULT CHARSET=utf8mb4 COMMENT='小程序授权信息表';
 
+CREATE TABLE `album` (
+  `id` BIGINT(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '相册ID',
+  `userId` BIGINT(20) unsigned NOT NULL COMMENT '对应用户表的id',
+  `title` VARCHAR(200) NOT NULL DEFAULT '' COMMENT '标题',
+  `description` VARCHAR(500) NOT NULL DEFAULT '' COMMENT '描述',
+  `password` VARCHAR(20) NOT NULL DEFAULT '' COMMENT '密码',
+
+  `extra` VARCHAR(10000) NOT NULL DEFAULT '' COMMENT '备用字段',
+  `created` INT(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated` INT(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  `isDeleted` INT(11) NOT NULL DEFAULT '0' COMMENT '0未删除 1已删除',
+  PRIMARY KEY (`id`),
+  KEY `idx_created` (`created`),
+  KEY `idx_updated` (`updated`)
+) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8mb4 COMMENT='相册表';
+
 CREATE TABLE `picture` (
   `id` BIGINT(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `userId` BIGINT(20) unsigned NOT NULL COMMENT '对应用户表的id',
+  `albumId` BIGINT(20) unsigned NOT NULL COMMENT '对应相册表的id',
   `url` VARCHAR(200) NOT NULL DEFAULT '' COMMENT '照片url',
   `description` VARCHAR(500) NOT NULL DEFAULT '' COMMENT '描述',
   `time` INT(11) unsigned NOT NULL DEFAULT '0' COMMENT '照片时间',
